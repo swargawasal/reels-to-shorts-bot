@@ -39,8 +39,8 @@ A fully automated Telegram bot that:
 3. Add your secrets in a `.env` file:
    ```env
    TELEGRAM_BOT_TOKEN=your_bot_token
-   YT_CLIENT_ID=your_youtube_client_id
-   YT_CLIENT_SECRET=your_youtube_client_secret
+   YT_CLIENT_SECRET=your_client_secret.json
+   DEFAULT_HASHTAGS=#shorts etc.. 
    INSTAGRAM_SESSIONID=your_instagram_sessionid
    ```
 
@@ -53,15 +53,26 @@ A fully automated Telegram bot that:
 
 ```
 .
-├── main.py
+├──  requirements.txt
+├──  .env
+├── downloader.py
 ├── uploader.py
-├── instagram_downloader.py
-├── youtube_uploader.py
-├── telegram_bot.py
-├── .env
-├── requirements.txt
+├── main.py
+├── client_secret.json
+├── token.pickle
 └── README.md
 ```
+⚠️ Troubleshooting
+
+If you face any issues while running the bot, such as authentication errors, upload failures, or session problems, try the following:
+
+Double-check your .env credentials.
+
+Ensure client_secret.json and token.json exist locally and are valid.
+
+For Colab or headless environments, use the token-based authentication method.
+
+If something still doesn’t work, you can use ChatGPT to debug.
 
 ## 📜 License
 
