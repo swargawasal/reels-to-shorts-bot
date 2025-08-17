@@ -1,3 +1,10 @@
+# Custom ignores for this project
+.env
+token.json
+client_secret.json
+upload_log.csv
+downloads/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
