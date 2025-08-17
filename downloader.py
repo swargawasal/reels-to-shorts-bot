@@ -5,6 +5,7 @@ import yt_dlp
 import asyncio
 
 logger = logging.getLogger("downloader")
+logging.getLogger("yt_dlp").setLevel(logging.ERROR)
 FFMPEG_BIN = os.environ.get("FFMPEG_BIN", r"C:\ffmpeg\ffmpeg-7.1.1-full_build\bin")  # adjust or leave unset
 DOWNLOAD_DIR = "downloads"
 
@@ -41,4 +42,5 @@ async def download_video(url: str) -> str | None:
             return path
         await asyncio.sleep(2)
     return None
+
 
