@@ -23,6 +23,11 @@ def _sync_download(url: str) -> str | None:
         "retries": 3,
         "nocheckcertificate": True,
     }
+    # Add Instagram session authentication
+    sessionid = os.environ.get("INSTAGRAM_SESSIONID")
+    if sessionid:
+        ydl_opts["cookiefile"] = None
+        ydl_opts["cookies"] = f"sessionid={sessionid}"
     if FFMPEG_BIN and os.path.isdir(FFMPEG_BIN):
         ydl_opts["ffmpeg_location"] = FFMPEG_BIN
 
@@ -42,5 +47,7 @@ async def download_video(url: str) -> str | None:
             return path
         await asyncio.sleep(2)
     return None
+
+
 
 
