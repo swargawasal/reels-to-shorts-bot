@@ -8,6 +8,7 @@ from googleapiclient.http import MediaFileUpload
 from googleapiclient.errors import HttpError
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
 
 SCOPES = ["https://www.googleapis.com/auth/youtube.upload"]
 CLIENT_SECRET_FILE = os.environ.get("CLIENT_SECRET_FILE", "client_secret.json")
@@ -28,7 +29,7 @@ def _get_service_sync():
         if not creds:
             # Desktop/server: open local browser
             flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRET_FILE, SCOPES)
-            creds = flow.run_local_server(port=0)
+            creds = flow.run_local_server(prompt="consent")
         with open(TOKEN_FILE, "w") as f:
             f.write(creds.to_json())
     return build("youtube", "v3", credentials=creds)
@@ -69,3 +70,4 @@ def _upload_sync(file_path: str, hashtags: str, title: str | None) -> str | None
 
 async def upload_to_youtube(file_path: str, hashtags: str, title: str | None):
     return await asyncio.to_thread(_upload_sync, file_path, hashtags, title)
+
